@@ -5,7 +5,7 @@
         <img [src]="[webService.getDestinationImage(flight.destination)]" class="card-img-top" [alt]="flight.destination">
         <div class="card-body">
           <h5 class="card-title">{{flight.destination}}</h5>
-          <p class="card-text">{{formatDate(flight.scheduledAt)}}  {{flight.flightNumber}}</p>
+          <p class="card-text">{{webService.formatDate(flight.scheduledAt)}}  {{flight.flightNumber}}</p>
 
         </div>
 

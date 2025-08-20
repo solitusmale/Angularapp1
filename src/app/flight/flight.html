@@ -4,11 +4,56 @@
       <li class="breadcrumb-item">
         <a routerLink="Home">Home</a></li>
       <li class="breadcrumb-item">
-        <a routerLink="{{'/search?d=' + flight.destination}}">Flights</a></li>
+        <a routerLink="/list">Flights</a></li>
       <li class="breadcrumb-item active" aria-current="page">
         {{flight.destination}} ({{flight.flightNumber}})
       </li>
     </ol>
   </nav>
-  <pre>{{flight | json}}</pre>
+  <div class="card mb-3" style="max-width: 70vw;">
+    <div class="row g-0">
+      <div class="col-md-7">
+        <img src="{{webService.getDestinationImage(flight.destination)}}" class="img-fluid rounded-start"
+          alt="{{flight.destination}}">
+      </div>
+      <div class="col-md-5">
+        <div class="card-body">
+          <h3 class="card-title">{{flight.destination}}</h3>
+          <p class="card-text"><small class="text-muted">{{flight.flightKey}}</small></p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <strong>Flight Number:</strong> {{flight.flightNumber}}
+            </li>
+            <li class="list-group-item">
+              <strong>Estimated At:</strong> {{webService.formatDate(flight.estimatedAt)}}
+            </li>
+            <li class="list-group-item" *ngIf="flight.connectedType != '0'">
+              <strong>Connected Flight:</strong> {{webService.formatValue(flight.connectedFlight)}}
+            </li>
+            <li class="list-group-item">
+              <strong>Plane Model:</strong> {{webService.formatValue(flight.plane)}}
+            </li>
+            <li class="list-group-item">
+              <strong>Gate:</strong> {{webService.formatValue(flight.gate)}}
+            </li>
+            <li class="list-group-item">
+              <strong>Terminal:</strong> {{webService.formatValue(flight.terminal)}}
+            </li>
+            <div class="card-body">
+              <a routerLink="/" class="btn btn-primary">
+                <i class="fa-solid fa-house"></i> Back to Home</a>
+              <button routerLink="/" class="btn btn-success ms-1">
+                <i class="fa-solid fa-floppy-disk"></i> Save to Favorites</button>
+            </div>
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-100 mb-3">
+    <iframe class="mx-auto" [src]="getMapUrl() | safe" width="100%" height="360" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
 </div>
