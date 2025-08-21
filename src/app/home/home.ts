@@ -27,7 +27,7 @@ export class Home implements OnInit {
   public flights: PageModel<FlightModel> | null = null
 
   constructor() {
-    this.webService = new WebService()
+    this.webService = WebService.getInstance();
   }
 
   ngOnInit(): void {
@@ -42,7 +42,5 @@ export class Home implements OnInit {
     return `https://www.google.com/maps?output=embed&q=${this.flights?.content[0].destination}`
   }
 
-  public formatDate(iso: string) {
-    return new Date(iso).toLocaleString('sr-RS')
-  }
+  
 }
